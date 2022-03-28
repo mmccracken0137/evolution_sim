@@ -151,8 +151,8 @@ class Sim:
                                ((ag.pos[0] + 1) * self.scale, (ag.pos[1] + 1) * self.scale),
                                self.scale / 2)
         # render text
-        timestamp = "t = end generation"
-        self.world.draw_label(timestamp)
+        timestamp = "t = end generation " + str(self.generation_number)
+        self.world.draw_step_label(timestamp)
         pygame.display.update()
         self.FramePerSec.tick(self.fps)
 
@@ -210,7 +210,9 @@ class Sim:
                 timestamp = "t = "
                 for i in range(3 - len(str(t))): timestamp += " "
                 timestamp += str(t)
-                self.world.draw_label(timestamp)
+                self.world.draw_step_label(timestamp)
+                genstamp = 'generation = ' + str(self.generation_number)
+                self.world.draw_gen_label(genstamp)
                 pygame.display.update()
 
                 for event in pygame.event.get():
@@ -227,6 +229,7 @@ class World:
     def __init__(self, xdim, ydim, scale=1, bkgd=(65, 65, 65)):
         pygame.init()
         self.ypad = 20
+        self.xpad = 20
         self.xdim = xdim
         self.ydim = ydim
         self.scale = scale
@@ -236,9 +239,14 @@ class World:
         pygame.display.set_caption("world")
         self.font = pygame.font.SysFont("monospace", 16)
 
-    def draw_label(self, txt):
+    def draw_step_label(self, txt):
         label = self.font.render(txt, 1, (255,255,255))
         self.disp.blit(label, (5, self.ydim * self.scale + self.ypad - 12))
+
+    def draw_gen_label(self, txt):
+        label = self.font.render(txt, 1, (255,255,255))
+        self.disp.blit(label, (self.xdim * self.scale / 2,
+                               self.ydim * self.scale + self.ypad - 12))
 
 class Agent:
 

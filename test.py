@@ -9,6 +9,7 @@ os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (30,60)
 dims = (80, 80)
 n_agents = 500
 mutation_prob = 0.01
+n_random_barriers = 800
 sim = Sim(dims[0], dims[1], n_agents, mutation_prob, ngenes=6, scale=8, fps=10, diags=1,
           steps_per_gen=120)
 
@@ -24,14 +25,14 @@ for i in range(dims[0]):
         #     barr[i, j] = 1
 
 sim.set_repro_zones(arr)
-sim.set_barriers(sim.random_barrier(500, min_x_ratio=0.01, max_x_ratio=0.85)) #barr)
+sim.set_barriers(sim.random_barrier(n_random_barriers, min_x_ratio=0.01, max_x_ratio=0.85)) #barr)
 sim.create_agents()
 
 n_gens = 100
 for i in range(n_gens):
     sim.run_generation()
     sim.kill_agents()
-    sim.set_barriers(sim.random_barrier(500, min_x_ratio=0.01, max_x_ratio=0.85)) #barr)
+    sim.set_barriers(sim.random_barrier(n_random_barriers, min_x_ratio=0.01, max_x_ratio=0.85)) #barr)
     sim.reproduce_agents()
 
 
