@@ -10,8 +10,8 @@ dims = (80, 80)
 n_agents = 500
 mutation_prob = 0.01
 n_random_barriers = 800
-sim = Sim(dims[0], dims[1], n_agents, mutation_prob, ngenes=6, scale=8, fps=10, diags=1,
-          steps_per_gen=120)
+sim = Sim(dims[0], dims[1], n_agents, mutation_prob, ngenes=6, 
+          scale=8, fps=10, diags=1, steps_per_gen=120)
 
 arr = np.zeros(dims)
 barr = np.zeros(dims)
