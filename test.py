@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (30,60)
 
-dims = (80, 80)
+dims = (100, 80)
 n_agents = 500
 mutation_prob = 0.01
 n_random_barriers = 800
 sim = Sim(dims[0], dims[1], n_agents, mutation_prob, ngenes=6, 
-          scale=8, fps=10, diags=1, steps_per_gen=120)
+          scale=10, fps=10, diags=1, steps_per_gen=120)
 
 arr = np.zeros(dims)
 barr = np.zeros(dims)
